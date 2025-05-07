@@ -48,9 +48,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Composable
-fun listaAmbientes(innerPadding: PaddingValues, onAnimalClick: (Environment) -> Unit) {
+fun listaAmbientes(innerPadding: PaddingValues, onAnimalClick: (Environment, List<Animal>) -> Unit) {
     var ambientes by remember {
         mutableStateOf<List<Environment>?>(null)
+    }
+
+    var animales by remember {
+        mutableStateOf<List<Animal>?>(null)
     }
 
     val scope = rememberCoroutineScope()
@@ -66,6 +70,10 @@ fun listaAmbientes(innerPadding: PaddingValues, onAnimalClick: (Environment) -> 
 
                 val environmentsService = retrofit.create(environmentsService::class.java)
                 ambientes = environmentsService.getEnvironments()
+
+                val animalesService = retrofit.create(animalesService::class.java)
+                animales = animalesService.getAnimales()
+
                 Log.d("APIII", "Se recibieron ${ambientes} animales")
 
 
@@ -99,7 +107,7 @@ fun listaAmbientes(innerPadding: PaddingValues, onAnimalClick: (Environment) -> 
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { onAnimalClick(ambiente) }
+                            .clickable { onAnimalClick(ambiente, animales!!) }
                     ) {
                         Image(
                             painter = rememberAsyncImagePainter(ambiente.image),

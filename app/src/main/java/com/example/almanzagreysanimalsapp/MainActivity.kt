@@ -64,6 +64,7 @@ class MainActivity : ComponentActivity() {
 
                 val navController = rememberNavController()
 
+
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize()
@@ -177,10 +178,15 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(route = "ambientes") {
-                            listaAmbientes(innerPadding = innerPadding) { selectedAmbiente ->
+                            listaAmbientes(innerPadding = innerPadding) { selectedAmbiente, animalesList ->
                                 navController.currentBackStackEntry
                                     ?.savedStateHandle
                                     ?.set("ambiente", selectedAmbiente)
+
+                                navController.currentBackStackEntry
+                                    ?.savedStateHandle
+                                    ?.set("animales", animalesList)
+
                                 navController.navigate("detalleAmbiente")
                             }
                         }
@@ -190,8 +196,14 @@ class MainActivity : ComponentActivity() {
                                 ?.savedStateHandle
                                 ?.get<Environment>("ambiente")
 
+                            val animales = navController.previousBackStackEntry
+                                ?.savedStateHandle
+                                ?.get<List<Animal>>("animales")
+
                             if (ambiente != null) {
-                                detalleAmbiente(ambiente = ambiente, innerPadding = innerPadding)
+                                if (animales != null) {
+                                    detalleAmbiente(ambiente = ambiente,animales = animales, innerPadding = innerPadding)
+                                }
                             }
                         }
 
