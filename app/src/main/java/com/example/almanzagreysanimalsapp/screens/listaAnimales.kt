@@ -37,7 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
 import com.example.almanzagreysanimalsapp.models.Animal
-import com.example.almanzagreysanimalsapp.services.animalesServie
+import com.example.almanzagreysanimalsapp.services.animalesService
 import com.example.almanzagreysanimalsapp.ui.theme.AlmanzaGreysAnimalsAppTheme
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -60,7 +60,7 @@ fun listaAnimales(innerPadding: PaddingValues) {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
-                val animalesServie = retrofit.create(animalesServie::class.java)
+                val animalesServie = retrofit.create(animalesService::class.java)
                 animales = animalesServie.getAnimales()
                 Log.d("APIII", "Se recibieron ${animales} animales")
 
