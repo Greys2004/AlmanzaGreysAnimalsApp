@@ -84,15 +84,18 @@ fun listaAnimales(innerPadding: PaddingValues, onAnimalClick: (Animal) -> Unit) 
             )
 
         ) {
-
-            Row(
+            Column(
                 Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Column {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Text(
                         "Animales",
                         style = MaterialTheme.typography.headlineMedium,
@@ -106,7 +109,11 @@ fun listaAnimales(innerPadding: PaddingValues, onAnimalClick: (Animal) -> Unit) 
                         Text("Agregar", color = Color.Black)
                     }
                 }
-                Text("Conoce a los animales más increíbles del mundo", color = Color.White)
+                Text(
+                    "Conoce a los animales más increíbles del mundo",
+                    color = Color.White,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
             }
 
             // Lista de animales
