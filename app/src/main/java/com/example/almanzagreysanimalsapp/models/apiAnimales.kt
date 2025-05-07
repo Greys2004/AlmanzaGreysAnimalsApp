@@ -1,5 +1,8 @@
 package com.example.almanzagreysanimalsapp.models
 
+import java.io.Serializable
+
+
 data class Animal(
     val description: String,
     val environmentId: String,
@@ -8,4 +11,4 @@ data class Animal(
     val image: String,
     val imageGallery: List<String>,
     val name: String
-)
+) : Serializable

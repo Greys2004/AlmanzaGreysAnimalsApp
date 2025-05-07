@@ -29,6 +29,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.almanzagreysanimalsapp.models.Animal
+import com.example.almanzagreysanimalsapp.models.Environment
+import com.example.almanzagreysanimalsapp.screens.detalleAmbiente
+import com.example.almanzagreysanimalsapp.screens.detalleAnimal
 import com.example.almanzagreysanimalsapp.screens.listaAmbientes
 import com.example.almanzagreysanimalsapp.screens.listaAnimales
 import com.example.almanzagreysanimalsapp.ui.theme.AlmanzaGreysAnimalsAppTheme
@@ -99,12 +103,45 @@ class MainActivity : ComponentActivity() {
 
                 ) { innerPadding ->
                     NavHost(navController = navController, startDestination = "animales") {
+
                         composable(route = "animales") {
-                            listaAnimales(innerPadding = innerPadding)
+                            listaAnimales(innerPadding = innerPadding) { selectedAnimal ->
+                                navController.currentBackStackEntry
+                                    ?.savedStateHandle
+                                    ?.set("animal", selectedAnimal)
+                                navController.navigate("detalleAnimal")
+                            }
                         }
+
+                        composable("detalleAnimal") {
+                            val animall = navController.previousBackStackEntry
+                                ?.savedStateHandle
+                                ?.get<Animal>("animal")
+
+                            if (animall != null) {
+                                detalleAnimal(animal = animall, innerPadding = innerPadding)
+                            }
+                        }
+
                         composable(route = "ambientes") {
-                            listaAmbientes(innerPadding = innerPadding)
+                            listaAmbientes(innerPadding = innerPadding) { selectedAmbiente ->
+                                navController.currentBackStackEntry
+                                    ?.savedStateHandle
+                                    ?.set("ambiente", selectedAmbiente)
+                                navController.navigate("detalleAmbiente")
+                            }
                         }
+
+                        composable("detalleAmbiente") {
+                            val ambiente = navController.previousBackStackEntry
+                                ?.savedStateHandle
+                                ?.get<Environment>("ambiente")
+
+                            if (ambiente != null) {
+                                detalleAmbiente(ambiente = ambiente, innerPadding = innerPadding)
+                            }
+                        }
+
                     }
                 }
             }

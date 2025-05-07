@@ -46,7 +46,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Composable
-fun listaAmbientes(innerPadding: PaddingValues) {
+fun listaAmbientes(innerPadding: PaddingValues, onAnimalClick: (Environment) -> Unit) {
     var ambientes by remember {
         mutableStateOf<List<Environment>?>(null)
     }
@@ -112,8 +112,7 @@ fun listaAmbientes(innerPadding: PaddingValues) {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable {
-                            }
+                            .clickable { onAnimalClick(ambiente) }
                     ) {
                         Image(
                             painter = rememberAsyncImagePainter(ambiente.image),
@@ -139,6 +138,9 @@ fun listaAmbientes(innerPadding: PaddingValues) {
 @Composable
 fun listaAmbientesPreview() {
     AlmanzaGreysAnimalsAppTheme {
-        listaAmbientes(innerPadding = PaddingValues(10.dp))
+        listaAmbientes(
+            innerPadding = PaddingValues(10.dp),
+            onAnimalClick = TODO()
+        )
     }
 }
