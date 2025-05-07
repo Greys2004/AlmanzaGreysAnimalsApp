@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.Button
@@ -30,6 +31,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -75,32 +77,17 @@ fun listaAmbientes(innerPadding: PaddingValues, onAnimalClick: (Environment) -> 
 
 
     ambientes?.let { lista ->
-        Column(modifier = Modifier.padding(innerPadding)) {
+        Column(
+            modifier = Modifier.padding(innerPadding),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
 
-            // Encabezado
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column {
-                    Text(
-                        "Ambientes",
-                        style = MaterialTheme.typography.headlineMedium,
-                        color = Color.White
-                    )
-                    Text("Estos son los ambientes", color = Color.White)
-                }
-                Button(
-                    onClick = { /* Solo diseño */ },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)
-                ) {
-                    Icon(Icons.Default.List, contentDescription = "Agregar", tint = Color.Black)
-                    Text("Agregar", color = Color.Black)
-                }
-            }
+            Text(
+                "Ambientes",
+                style = MaterialTheme.typography.headlineMedium,
+                color = Color.White
+            )
 
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -119,7 +106,8 @@ fun listaAmbientes(innerPadding: PaddingValues, onAnimalClick: (Environment) -> 
                             contentDescription = ambiente.name,
                             modifier = Modifier
                                 .size(160.dp)
-                                .padding(8.dp),
+                                .padding(8.dp)
+                                .clip(CircleShape),
                             contentScale = ContentScale.Crop
                         )
                         Text(ambiente.name, fontWeight = FontWeight.Bold, color = Color.White)
