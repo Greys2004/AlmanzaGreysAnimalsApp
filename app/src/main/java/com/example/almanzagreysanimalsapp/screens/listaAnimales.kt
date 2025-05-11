@@ -105,8 +105,15 @@ fun listaAnimales(innerPadding: PaddingValues, onAnimalClick: (Animal) -> Unit) 
                         onClick = { },
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFf3f8a4).copy(alpha = 0.9f)),
                     ) {
-                        Icon(Icons.Default.AddCircle, contentDescription = "Agregar", tint = Color.Black)
-                        Text("Agregar", color = Color.Black)
+                        Icon(
+                            Icons.Default.AddCircle,
+                            contentDescription = "Agregar",
+                            tint = Color.Black
+                        )
+                        Text(
+                            "Agregar",
+                            color = Color.Black
+                        )
                     }
                 }
                 Text(
@@ -131,14 +138,18 @@ fun listaAnimales(innerPadding: PaddingValues, onAnimalClick: (Animal) -> Unit) 
                     ) {
                         Image(
                             painter = rememberAsyncImagePainter(animal.image),
-                            contentDescription = animal.name,
+                            contentDescription = null,
                             modifier = Modifier
                                 .size(160.dp)
                                 .padding(8.dp)
                                 .clip(CircleShape),
                             contentScale = ContentScale.Crop
                         )
-                        Text(animal.name, fontWeight = FontWeight.Bold, color = Color.White)
+                        Text(
+                            animal.name,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
                     }
                 }
             }
