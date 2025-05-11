@@ -43,7 +43,9 @@ fun detalleAnimal(animal: Animal, innerPadding: PaddingValues) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
                 Text(
                     text = animal.name,
                     style = MaterialTheme.typography.headlineLarge,
@@ -55,7 +57,7 @@ fun detalleAnimal(animal: Animal, innerPadding: PaddingValues) {
 
                 Image(
                     painter = rememberAsyncImagePainter(animal.image),
-                    contentDescription = animal.name,
+                    contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
@@ -71,7 +73,7 @@ fun detalleAnimal(animal: Animal, innerPadding: PaddingValues) {
                         .wrapContentWidth(Alignment.CenterHorizontally)
                 )
 
-                // Título: Hechos Interesantes
+                // Hechos Interesantes
                 Text(
                     text = "Hechos Interesantes",
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
@@ -81,7 +83,6 @@ fun detalleAnimal(animal: Animal, innerPadding: PaddingValues) {
                         .wrapContentWidth(Alignment.CenterHorizontally)
                 )
 
-                // Lista de hechos
                 animal.facts.forEach { fact ->
                     Box(
                         modifier = Modifier
@@ -109,7 +110,7 @@ fun detalleAnimal(animal: Animal, innerPadding: PaddingValues) {
                     }
                 }
 
-                // Título: Galería
+                // Galería
                 Text(
                     text = "Galería de Imágenes",
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
@@ -119,15 +120,13 @@ fun detalleAnimal(animal: Animal, innerPadding: PaddingValues) {
                         .wrapContentWidth(Alignment.CenterHorizontally)
                 )
 
-                // Galería
                 LazyRow(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(animal.imageGallery.size) { index ->
-                        val imageUrl = animal.imageGallery[index]
+                    items(animal.imageGallery) { imageUrl ->
                         Image(
                             painter = rememberAsyncImagePainter(imageUrl),
                             contentDescription = null,
