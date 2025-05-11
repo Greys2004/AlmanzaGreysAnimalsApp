@@ -1,6 +1,7 @@
 package com.example.almanzagreysanimalsapp.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,7 +34,8 @@ import com.example.almanzagreysanimalsapp.models.Environment
 fun detalleAmbiente(
     ambiente: Environment,
     animales: List<Animal>,
-    innerPadding: PaddingValues
+    innerPadding: PaddingValues,
+    onAnimalClick: (Animal) -> Unit
 ) {
     val animalesDelAmbiente = animales.filter { it.environmentId == ambiente._id }
 
@@ -89,6 +91,7 @@ fun detalleAmbiente(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
+                    .clickable { onAnimalClick(animal)}
             ) {
                 Image(
                     painter = rememberAsyncImagePainter(animal.image),

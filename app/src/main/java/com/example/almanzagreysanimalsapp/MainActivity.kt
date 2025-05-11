@@ -158,6 +158,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(navController = navController, startDestination = "animales") {
 
+                        //OnClick
                         composable(route = "animales") {
                             listaAnimales(innerPadding = innerPadding) { selectedAnimal ->
                                 navController.currentBackStackEntry
@@ -177,6 +178,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
+                        //OnClick
                         composable(route = "ambientes") {
                             listaAmbientes(innerPadding = innerPadding) { selectedAmbiente, animalesList ->
                                 navController.currentBackStackEntry
@@ -200,10 +202,18 @@ class MainActivity : ComponentActivity() {
                                 ?.savedStateHandle
                                 ?.get<List<Animal>>("animales")
 
-                            if (ambiente != null) {
-                                if (animales != null) {
-                                    detalleAmbiente(ambiente = ambiente,animales = animales, innerPadding = innerPadding)
-                                }
+                            if (ambiente != null && animales != null) {
+                                detalleAmbiente(
+                                    ambiente = ambiente,
+                                    animales = animales,
+                                    innerPadding = innerPadding,
+                                    onAnimalClick = { selectedAnimal ->
+                                        navController.currentBackStackEntry
+                                            ?.savedStateHandle
+                                            ?.set("animal", selectedAnimal)
+                                        navController.navigate("detalleAnimal")
+                                    }
+                                )
                             }
                         }
 
