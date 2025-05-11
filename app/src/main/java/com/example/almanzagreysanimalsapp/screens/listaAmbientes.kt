@@ -118,7 +118,11 @@ fun listaAmbientes(innerPadding: PaddingValues, onAnimalClick: (Environment, Lis
                                 .clip(CircleShape),
                             contentScale = ContentScale.Crop
                         )
-                        Text(ambiente.name, fontWeight = FontWeight.Bold, color = Color.White)
+                        Text(
+                            ambiente.name,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
                     }
                 }
             }
